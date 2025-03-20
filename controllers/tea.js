@@ -1,5 +1,5 @@
 const multer = require('multer');
-const Tea = require('../models/tea'); // Import the Tea model
+const { Tea, User } = require('../models/tea'); // Import the Tea model
 const path = require('path');
 
 const storage = multer.diskStorage({
@@ -32,6 +32,33 @@ const getAllTea = async (req, res) => {
     try {
         const teas = await Tea.find({});
         res.json(teas);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+
+
+
+// POST new user
+const newUser = async (req, res) => {
+    try {
+
+        console.log(req.file); // Add this line to check file details
+        const existingTea = await User.findOne({ name: req.body.name });
+
+        if (existingTea) {
+            return res.json({ message: "User already exists" });
+        }
+
+        const newUser = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+         });
+
+        const savedUser = await newUser.save();
+        res.json(savedUser);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -159,5 +186,6 @@ module.exports = {
     deleteAllTea,
     getOneTea,
     newComment,
-    deleteOneTea
+    deleteOneTea,
+    newUser
 };

@@ -1,16 +1,26 @@
-const mongoose = require("mongoose"); //import mongoose
+const mongoose = require('mongoose');
 
-// tea schema
+// Tea Schema
 const TeaSchema = new mongoose.Schema({
-    name: {type:String, required:true},
+    name: String,
     image: String,
     description: String,
-    keywords: String,
+    keywords: [String],
     origin: String,
-    brew_time: Number,
-    temperature: Number,
-    comments: [{ text: String, date: {type:String, default: new Date()} }]
-});
+    brew_time: String,
+    temperature: String,
+    comments: [{ text: String, date: Date }]
+}, { collection: 'tea_collection' });
 
-const Tea = mongoose.model('Tea', TeaSchema); //convert to model named Tea
-module.exports = Tea; //export for controller use
+// User Schema
+const UserSchema = new mongoose.Schema({
+    name: String,
+    email: { type: String, unique: true },
+    password: String
+}, { collection: 'users' });
+
+// Export both models
+const Tea = mongoose.model('Tea', TeaSchema);
+const User = mongoose.model('User', UserSchema);
+
+module.exports = { Tea, User };
