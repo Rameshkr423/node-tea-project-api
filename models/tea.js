@@ -11,7 +11,7 @@ const TeaSchema = new mongoose.Schema({
     temperature: String,
     comments: [{ text: String, date: Date }]
 }, { collection: 'tea_collection' });
-
+    
 // User Schema
 const UserSchema = new mongoose.Schema({
     name: String,
