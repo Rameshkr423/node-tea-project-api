@@ -5,7 +5,6 @@ const connectDB = require('./db'); // Import the DB connection file
 const routes = require('./routes/tea'); // Import routes
 const helmet = require('helmet');
 const compression = require('compression');
-
 const app = express();
 
 // Security & Performance Middleware
@@ -21,7 +20,6 @@ app.use(express.static(path.join(__dirname, 'public'))); // Ensure index.html is
 
 // Use API routes
 app.use('/api', routes); // Use API routes under "/api"
-
 // Serve index.html for the root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
