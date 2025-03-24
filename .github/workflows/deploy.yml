@@ -21,5 +21,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "*"
+          port: 1987
+          timeout: 300s  # Increase timeout if needed
           target: "/home/posteit/domains/uatcontrol.posteit.org/public_html"
           strip_components: 1  # Avoids creating an extra folder

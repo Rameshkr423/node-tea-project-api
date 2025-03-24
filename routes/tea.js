@@ -10,7 +10,11 @@ router.get('/tea/:name', teaController.getOneTea);
 router.post('/tea/:name', teaController.newComment);
 router.delete('/tea/:name', teaController.deleteOneTea);
 router.post("/user", teaController.newUser);
-
+      
 module.exports = router;
+<<<<<<< HEAD
 
 // latest  testing code 1
+=======
+       
+>>>>>>> latest-code
