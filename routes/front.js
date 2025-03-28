@@ -1,15 +1,25 @@
 const express = require('express');
 const router  = express.Router();
-const teaController = require('../controllers/front');
+const path = require('path');
+const frontController = require('../controllers/front');
+    
+// Serve index.html for the root route
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../','views', 'index.html'));
+});
 
-router.get('/tea', teaController.getAllTea);
-router.delete('/tea', teaController.deleteAllTea);
-router.post("/tea", teaController.uploadImg, teaController.newTea);
-//router.post("/tea", upload.none(), teaController.newTea);
-router.get('/tea/:name', teaController.getOneTea);
-router.post('/tea/:name', teaController.newComment);
-router.delete('/tea/:name', teaController.deleteOneTea);
-router.post("/user", teaController.newUser);
-      
+
+router.get('/service', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'views', 'service-details.html'));
+});
+
+router.get('/starter', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'views', 'starter-page.html'));
+});
+
+router.use((req, res, next) => {
+    res.status(404).send({ status: 404, message: 'Page URL not found' });
+});
+
 module.exports = router;
        

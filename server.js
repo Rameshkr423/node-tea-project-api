@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const connectDB = require('./db'); // Import the DB connection file
-const routes = require('./routes/tea'); // Import routes
+const tearoutes = require('./routes/tea'); // Import routes
+const frontroutes = require('./routes/front'); // Import routes
 const helmet = require('helmet');
 const compression = require('compression');
 const app = express();
@@ -25,24 +26,8 @@ app.use((req, res, next) => {
 });
 
 // Use API routes
-app.use('/api', routes); // Use API routes under "/api"
-// Serve index.html for the root route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
-
-
-app.get('/service', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'service-details.html'));
-});
-
-app.get('/starter', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'starter-page.html'));
-});
-
-app.use((req, res, next) => {
-    res.status(404).send({ status: 404, message: 'Page URL not found' });
-});
+app.use('/api', tearoutes); // Use API routes under "/api"
+app.use('/', frontroutes); // Use API routes under "/api"
 
 
 const PORT = process.env.PORT || 3000;
