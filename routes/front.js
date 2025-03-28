@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const teaController = require('../controllers/tea');
+const teaController = require('../controllers/front');
 
 router.get('/tea', teaController.getAllTea);
 router.delete('/tea', teaController.deleteAllTea);
