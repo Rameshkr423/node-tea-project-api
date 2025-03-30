@@ -19,6 +19,8 @@ connectDB();
 // Serve static files (including index.html)
 app.use(express.static(path.join(__dirname, 'views'))); // Ensure index.html is in "public"
 
+app.set('view engine', 'pug'); // Template engine
+
 // Custom middleware
 app.use((req, res, next) => {
     console.log('Middleware executed!');
